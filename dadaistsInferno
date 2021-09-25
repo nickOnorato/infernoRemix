@@ -1,0 +1,43 @@
+#opening the txt file
+with open("/content/CANTO XVIII.txt") as f:
+  text = f.read()
+
+words = text.split(" ")
+
+#https://www.delftstack.com/howto/python/python-list-remove-all/
+#getting rid of extra spaces taking up elements in list
+try:
+  while True:
+    words.remove('')
+except ValueError:
+  pass
+
+# https://www.kite.com/python/answers/how-to-remove-newline-character-from-a-list-in-python#:~:text=Use%20str.,well%20as%20newline%20characters%20removed.
+#getting rid of new lines in txt file
+clean_words = []
+for word in words:
+    clean_words.append(word.strip())
+
+import random
+import string
+
+
+#from dadaist poem tutorial
+random.shuffle(clean_words)
+
+# creation of random title
+print('\t\t\t\t\t' + clean_words.pop(6).upper() + ' ' + clean_words.pop(6).upper() + '\n')
+
+poem = ''
+count = 1
+for w in range(66):
+  poem += clean_words.pop(6).upper() + ' '
+  palabra = clean_words.pop(6)
+  # using 8 since I am using the canto talking about the 8th cirlce of Hell
+  # formating to create increading indents and addition of ... to add a mysterious feel
+  if ((count % 8) == 0):
+    poem += '\n'
+    poem += ' ' * count
+    poem += '... '
+  count += 1
+print(poem)
